@@ -14,8 +14,12 @@ namespace AsyncInn
 {
     public class Startup
     {
-        public IConfiguration Configuration { get;}
+        /// <summary>
+        /// Configuration for dependency injection - should not be modifiable by users on the site, so don't allow setting?
+        /// </summary>
+        public IConfiguration Configuration { get; }
 
+        // Required for dependency injection
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;

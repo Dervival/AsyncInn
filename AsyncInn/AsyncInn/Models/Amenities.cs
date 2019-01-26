@@ -7,5 +7,8 @@ namespace AsyncInn.Models
 {
     public class Amenities
     {
+        //public key for Amenities
+        public int ID { get; set; }
+        public string Name { get; set; }
     }
 }

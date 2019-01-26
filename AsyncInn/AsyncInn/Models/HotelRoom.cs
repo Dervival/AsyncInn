@@ -12,7 +12,7 @@ namespace AsyncInn.Models
         public int RoomNumber { get; set; }
         
         //Foreign key for Room table
-        public decimal RoomId { get; set; }
+        public int RoomId { get; set; }
 
         //Payload
         public decimal Rate { get; set; }

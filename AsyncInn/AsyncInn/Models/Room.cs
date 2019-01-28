@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace AsyncInn.Models
 {
@@ -10,7 +11,11 @@ namespace AsyncInn.Models
         //primary key
         public int ID { get; set; }
 
+        [Required(ErrorMessage = "Please give a name to this room configuration.")]
+        [Display(Name = "Configuration Name")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Please choose whether the room is a studio, one bedroom, or two bedroom room.")]
+        [Display(Name = "Configuration Name")]
         public Layout Layout { get; set; }
 
         //navigation properties

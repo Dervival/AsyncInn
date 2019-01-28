@@ -3,8 +3,9 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
+<!DOCTYPE html>
+<link href="~/StyleSheet.css" rel="stylesheet" />
+<h1>Current List of Rooms With Given Amenities</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -22,20 +23,22 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Room.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amenity.ID)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amenity.ID)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<A href="/Home">Click Here</A> to return home.

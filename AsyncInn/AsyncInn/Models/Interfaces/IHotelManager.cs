@@ -16,6 +16,6 @@ namespace AsyncInn.Models.Interfaces
         //Update a hotel
         void UpdateHotel(Hotel hotel);
         //Delete a hotel
-        void DeleteStudent(int id);
+        void DeleteHotel(int id);
     }
 }

@@ -3,8 +3,14 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h1>Create</h1>
+<head>
+    <!--Meta tags for bootstrap...-->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale-1, shrink-to-fit=no" />
+    <!--And its CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
+</head>
+<h1>Create a New Hotel Location</h1>
 
 <h4>Hotel</h4>
 <hr />
@@ -40,4 +46,7 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 }

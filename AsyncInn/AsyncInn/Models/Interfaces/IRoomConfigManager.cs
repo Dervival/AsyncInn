@@ -14,8 +14,8 @@ namespace AsyncInn.Models.Interfaces
         //Read in several room configurations
         Task<IEnumerable<Room>> GetConfigurations();
         //Update a room
-        void UpdateRoom(Room room);
+        void UpdateConfiguration(Room room);
         //Delete a room
-        void DeleteRoom(int id);
+        void DeleteConfiguration(int id);
     }
 }

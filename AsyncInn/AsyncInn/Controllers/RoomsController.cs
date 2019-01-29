@@ -10,22 +10,22 @@ using AsyncInn.Models;
 
 namespace AsyncInn.Controllers
 {
-    public class RoomController : Controller
+    public class RoomsController : Controller
     {
         private readonly AsyncInnDbContext _context;
 
-        public RoomController(AsyncInnDbContext context)
+        public RoomsController(AsyncInnDbContext context)
         {
             _context = context;
         }
 
-        // GET: Room
+        // GET: Rooms
         public async Task<IActionResult> Index()
         {
             return View(await _context.Rooms.ToListAsync());
         }
 
-        // GET: Room/Details/5
+        // GET: Rooms/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,13 +43,13 @@ namespace AsyncInn.Controllers
             return View(room);
         }
 
-        // GET: Room/Create
+        // GET: Rooms/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Room/Create
+        // POST: Rooms/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -65,7 +65,7 @@ namespace AsyncInn.Controllers
             return View(room);
         }
 
-        // GET: Room/Edit/5
+        // GET: Rooms/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,7 +81,7 @@ namespace AsyncInn.Controllers
             return View(room);
         }
 
-        // POST: Room/Edit/5
+        // POST: Rooms/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -116,7 +116,7 @@ namespace AsyncInn.Controllers
             return View(room);
         }
 
-        // GET: Room/Delete/5
+        // GET: Rooms/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,7 +134,7 @@ namespace AsyncInn.Controllers
             return View(room);
         }
 
-        // POST: Room/Delete/5
+        // POST: Rooms/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

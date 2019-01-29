@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace AsyncInn.Models
 {
@@ -8,9 +9,17 @@ namespace AsyncInn.Models
         //Primary Key
         public int ID { get; set; }
 
+        [Required(ErrorMessage = "A hotel name is required.")]
+        [Display(Name="Hotel Name")]
         public string Name { get; set; }
-        public int Address { get; set; }
-        public int Phone { get; set; }
+
+        [Required(ErrorMessage = "Please enter an address.")]
+        [Display(Name = "Hotel Address")]
+        public string Address { get; set; }
+
+        [Display(Name="Contact number")]
+        [DataType(DataType.PhoneNumber)]
+        public string Phone { get; set; }
 
         //Navigation Properties
 

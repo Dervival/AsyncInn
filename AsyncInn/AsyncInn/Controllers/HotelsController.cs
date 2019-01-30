@@ -22,9 +22,21 @@ namespace AsyncInn.Controllers
         }
 
         // GET: Hotels
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    return View(await _context.GetHotels());
+        //}
+
+        public async Task<IActionResult> Index(string NameEntered)
         {
-            return View(await _context.GetHotels());
+            var hotels = await _context.GetHotels();
+
+            if (!String.IsNullOrEmpty(NameEntered))
+            {
+                hotels = hotels.Where(search => search.Name.Contains(NameEntered));
+            }
+
+            return View(hotels);
         }
 
         // GET: Hotels/Details/5
@@ -35,13 +47,13 @@ namespace AsyncInn.Controllers
                 return NotFound();
             }
 
-            var amenities = await _context.GetHotel((int)id);
-            if (amenities == null)
+            var hotels = await _context.GetHotel((int)id);
+            if (hotels == null)
             {
                 return NotFound();
             }
 
-            return View(amenities);
+            return View(hotels);
         }
 
         // GET: Hotels/Create

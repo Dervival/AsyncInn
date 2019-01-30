@@ -73,16 +73,21 @@ namespace AsyncInn.Controllers
         }
 
         // GET: RoomAmenities/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? roomID, int? amenitiesID)
         {
-            if (id == null)
+            if (roomID == null)
             {
-                return NotFound();
+                throw new Exception("roomID was null!");
             }
 
-            var roomAmenities = await _context.RoomAmenities.FindAsync(id);
+            if (amenitiesID == null)
+            {
+                throw new Exception("amenitiesID was null!");
+            }
+            var roomAmenities = await _context.RoomAmenities.FindAsync( roomID, amenitiesID);
             if (roomAmenities == null)
             {
+                throw new Exception("roomAmenities was null!");
                 return NotFound();
             }
             ViewData["AmenitiesID"] = new SelectList(_context.Amenities, "ID", "Name", roomAmenities.AmenitiesID);
@@ -128,9 +133,9 @@ namespace AsyncInn.Controllers
         }
 
         // GET: RoomAmenities/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? roomID, int? amenitiesID)
         {
-            if (id == null)
+            if (roomID == null || amenitiesID == null)
             {
                 return NotFound();
             }
@@ -138,7 +143,7 @@ namespace AsyncInn.Controllers
             var roomAmenities = await _context.RoomAmenities
                 .Include(r => r.Amenity)
                 .Include(r => r.Room)
-                .FirstOrDefaultAsync(m => m.AmenitiesID == id);
+                .FirstOrDefaultAsync(m => m.AmenitiesID == amenitiesID && m.RoomID == roomID);
             if (roomAmenities == null)
             {
                 return NotFound();
@@ -150,9 +155,9 @@ namespace AsyncInn.Controllers
         // POST: RoomAmenities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int roomID, int amenitiesID)
         {
-            var roomAmenities = await _context.RoomAmenities.FindAsync(id);
+            var roomAmenities = await _context.RoomAmenities.FindAsync(amenitiesID, roomID);
             _context.RoomAmenities.Remove(roomAmenities);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

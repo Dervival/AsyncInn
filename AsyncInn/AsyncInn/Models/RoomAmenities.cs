@@ -8,6 +8,8 @@ namespace AsyncInn.Models
 {
     public class RoomAmenities
     {
+        //Let's see if putting an ID in here helps
+        public int ID { get; set; }
         //Composite key - AmenitiesID is the foreign key for the Amenities table, RoomID is the foreign key for the Room Table
         [Required(ErrorMessage = "Please select a room configuration to assocate an amenity with.")]
         [Display(Name = "Configuration Name")]

@@ -5,7 +5,7 @@
 }
 <!DOCTYPE html>
 <link href="~/StyleSheet.css" rel="stylesheet" />
-<h1>List of current Configurations with Amenities</h1>
+<h1>List of current c</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -33,9 +33,9 @@
                     @Html.DisplayFor(modelItem => item.Amenity.Name)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @Html.ActionLink("Edit", "Edit", new { item.RoomID, item.AmenitiesID  }) 
+                    @Html.ActionLink("Details", "Details", new { item.RoomID, item.AmenitiesID }) 
+                    @Html.ActionLink("Delete", "Delete", new { item.RoomID, item.AmenitiesID })
                 </td>
             </tr>
         }

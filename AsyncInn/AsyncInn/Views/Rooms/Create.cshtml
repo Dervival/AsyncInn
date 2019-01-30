@@ -1,25 +1,30 @@
-﻿@model AsyncInn.Models.Amenities
+﻿@model AsyncInn.Models.Room
 
 @{
     ViewData["Title"] = "Create";
 }
 <!DOCTYPE html>
 <link href="~/StyleSheet.css" rel="stylesheet" />
-<h1>Create New Amenity</h1>
+<h1>Create a New Room Configuration</h1>
 
-<h4>Amenities</h4>
+<h4>Room</h4>
 <hr />
 <div>
     <div>
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly"></div>
-            <div class="form-group">
+            <div>
                 <label asp-for="Name"></label>
                 <input asp-for="Name"/>
-                <span asp-validation-for="Name" ></span>
+                <span asp-validation-for="Name"></span>
             </div>
             <div>
-                <input type="submit" value="Create" />
+                <label asp-for="Layout"></label>
+                <select asp-for="Layout"></select>
+                <span asp-validation-for="Layout"></span>
+            </div>
+            <div>
+                <input type="submit" value="Create"/>
             </div>
         </form>
     </div>

@@ -3,14 +3,8 @@
 @{
     ViewData["Title"] = "Create";
 }
-<head>
-    <!--Meta tags for bootstrap...-->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale-1, shrink-to-fit=no" />
-    <!--And its CSS-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
-</head>
-<h1>Create a New Hotel Room</h1>
+
+<h1>Create</h1>
 
 <h4>HotelRoom</h4>
 <hr />
@@ -20,7 +14,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="HotelId" class="control-label"></label>
-                <select asp-for="HotelId" class="form-control" asp-items="ViewBag.HotelId"></select>
+                <select asp-for="HotelId" class ="form-control" asp-items="ViewBag.HotelId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="RoomNumber" class="control-label"></label>
@@ -29,8 +23,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="RoomId" class="control-label"></label>
-                <input asp-for="RoomId" class="form-control" />
-                <span asp-validation-for="RoomId" class="text-danger"></span>
+                <select asp-for="RoomId" class ="form-control" asp-items="ViewBag.RoomId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Rate" class="control-label"></label>
@@ -56,6 +49,3 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>

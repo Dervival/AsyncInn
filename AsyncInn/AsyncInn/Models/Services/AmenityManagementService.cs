@@ -43,6 +43,7 @@ namespace AsyncInn.Models.Services
         public void UpdateAmenities(Amenities amenity)
         {
             _context.Amenities.Update(amenity);
+            _context.SaveChanges();
         }
     }
 }

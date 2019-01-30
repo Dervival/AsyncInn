@@ -88,7 +88,6 @@ namespace AsyncInn.Controllers
             if (roomAmenities == null)
             {
                 throw new Exception("roomAmenities was null!");
-                return NotFound();
             }
             ViewData["AmenitiesID"] = new SelectList(_context.Amenities, "ID", "Name", roomAmenities.AmenitiesID);
             ViewData["RoomID"] = new SelectList(_context.Rooms, "ID", "Name", roomAmenities.RoomID);

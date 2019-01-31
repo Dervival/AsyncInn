@@ -2,6 +2,13 @@
 Repository for my first EF core application - a mock implementation of an asset management system for a hotel chain called "Async Inn".
 
 #### Requirements
+For part four, this site must include:
+1.Add a layout that will be inherited/utilized on all of your pages (if you haven’t already).
+1.Implement a “search box” or filter on all of your model landing pages (Hotels, Rooms, and Amenities)
+1.Allow the functionality on your HotelController to display all the possible hotels, as well as the number of Rooms that each hotel has.
+1.Allow the functionality in your RoomController to see the number of Amenities that each room has
+1.At the top of all 3 of your base controllers (Hotel, Room, Amenities) include a total count of the asset. For instance, if you have a total of 5 Hotels, the top of your Hotel home page should say that you have 5 total hotels in the system.
+
 For part three, this site must include:
 1. 3 new interfaces
 2. All services registered in your Startup.cs class

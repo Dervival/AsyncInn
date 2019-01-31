@@ -30,6 +30,10 @@ namespace AsyncInn.Controllers
             {
                 rooms = rooms.Where(search => search.Name.Contains(NameEntered));
             }
+            //TODO: Figure out how to properly grab the count of rooms and put into ViewBag
+            //List<int> roomCount = new List<int> {1,2,3,4,5,6,7,8,9 };
+            //ViewBag.roomCount = roomCount;
+
 
             return View(rooms);
         }

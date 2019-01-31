@@ -2,14 +2,22 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "_Layout";
 }
 <!DOCTYPE html>
 <link href="~/StyleSheet.css" rel="stylesheet" />
 <h1>List of current Room Configurations</h1>
+<h3>There are currently @Model.Count() room configurations available.</h3>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<div>
+    <form method="post">
+        <label name="NameEntered">Filter by Room Name</label>
+        <input name="NameEntered" />
+    </form>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -19,25 +27,32 @@
             <th>
                 @Html.DisplayNameFor(model => model.Layout)
             </th>
+            <th>
+                Number of Amenities
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Layout)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Layout)
+            </td>
+            <td>
+                @*@ViewBag.RoomCount[i]*@ @* figure out how to implement viewbag*@
+                0
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

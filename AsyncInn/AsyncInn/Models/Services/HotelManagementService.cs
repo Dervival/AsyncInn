@@ -44,5 +44,16 @@ namespace AsyncInn.Models.Services
         {
             _context.Hotels.Update(hotel);
         }
+
+        /// <summary>
+        /// Returns the number of rooms assocatied with this 
+        /// </summary>
+        /// <param name="hotel"></param>
+        /// <returns></returns>
+        public int RoomCount(Hotel hotel)
+        {
+            int roomCount = _context.HotelRooms.Where(room => room.HotelId == hotel.ID).Count();
+            return roomCount;
+        }
     }
 }

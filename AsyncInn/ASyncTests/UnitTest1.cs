@@ -290,6 +290,7 @@ namespace ASyncTests
             Assert.True(roomAmen.AmenitiesID == 1);
         }
         //CRUD
+        //Amenities
         [Fact]
         public async void CanCreateAmenity()
         {
@@ -382,8 +383,9 @@ namespace ASyncTests
                 Assert.Null(result);
             }
         }
+        //Hotels
         [Fact]
-        public async void CanCreateHotel()
+        public async void CanReadHotel()
         {
             DbContextOptions<AsyncInnDbContext> options = new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("CreateHotel").Options;
 
@@ -437,7 +439,7 @@ namespace ASyncTests
         }
 
         [Fact]
-        public async void CanReadHotel()
+        public async void CanCreateHotel()
         {
             DbContextOptions<AsyncInnDbContext> options = new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("ReadHotel").Options;
 
@@ -484,6 +486,107 @@ namespace ASyncTests
                 hotelServ.DeleteHotel(hotel.ID);
 
                 var result = context.Hotels.FirstOrDefault(c => c.ID == hotel.ID);
+                //Assert
+                Assert.Null(result);
+            }
+        }
+        //Rooms
+        [Fact]
+        public async void CanCreateConfiguration()
+        {
+            DbContextOptions<AsyncInnDbContext> options = new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("CreateConfiguration").Options;
+
+            using (AsyncInnDbContext context = new AsyncInnDbContext(options))
+            {
+                // Arrange
+                Room room = new Room();
+                room.ID = 1;
+                room.Name = "test";
+                room.Layout = Layout.OneBedroom;
+                room.AmenityCount = 5;
+
+                //Act
+                ConfigurationManagementService roomServ = new ConfigurationManagementService(context);
+
+                await roomServ.CreateConfiguration(room);
+
+                var result = context.Rooms.FirstOrDefault(r => r.ID == room.ID);
+                //Assert
+                Assert.Equal(room, result);
+            }
+        }
+        [Fact]
+        public async void CanReadConfiguration()
+        {
+            DbContextOptions<AsyncInnDbContext> options = new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("ReadConfiguration").Options;
+
+            using (AsyncInnDbContext context = new AsyncInnDbContext(options))
+            {
+                // Arrange
+                Room room = new Room();
+                room.ID = 1;
+                room.Name = "test";
+                room.Layout = Layout.OneBedroom;
+                room.AmenityCount = 5;
+
+                //Act
+                ConfigurationManagementService roomServ = new ConfigurationManagementService(context);
+
+                await roomServ.CreateConfiguration(room);
+
+                var result = await roomServ.GetConfiguration(room.ID);
+                //Assert
+                Assert.Equal(room, result);
+            }
+        }
+        [Fact]
+        public async void CanUpdateConfiguration()
+        {
+            DbContextOptions<AsyncInnDbContext> options = new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("UpdateConfiguration").Options;
+
+            using (AsyncInnDbContext context = new AsyncInnDbContext(options))
+            {
+                // Arrange
+                Room room = new Room();
+                room.ID = 1;
+                room.Name = "test";
+                room.Layout = Layout.OneBedroom;
+                room.AmenityCount = 5;
+
+                //Act
+                ConfigurationManagementService roomServ = new ConfigurationManagementService(context);
+
+                await roomServ.CreateConfiguration(room);
+
+                room.Layout = Layout.Studio;
+                roomServ.UpdateConfiguration(room);
+
+                var result = context.Rooms.FirstOrDefault(r => r.ID == room.ID);
+                //Assert
+                Assert.Equal(room, result);
+            }
+        }
+        [Fact]
+        public async void CanDeleteConfiguration()
+        {
+            DbContextOptions<AsyncInnDbContext> options = new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("DeleteConfiguration").Options;
+
+            using (AsyncInnDbContext context = new AsyncInnDbContext(options))
+            {
+                // Arrange
+                Room room = new Room();
+                room.ID = 1;
+                room.Name = "test";
+                room.Layout = Layout.OneBedroom;
+                room.AmenityCount = 5;
+
+                //Act
+                ConfigurationManagementService roomServ = new ConfigurationManagementService(context);
+
+                await roomServ.CreateConfiguration(room);
+                roomServ.DeleteConfiguration(room.ID);
+
+                var result = context.Rooms.FirstOrDefault(r => r.ID == room.ID);
                 //Assert
                 Assert.Null(result);
             }

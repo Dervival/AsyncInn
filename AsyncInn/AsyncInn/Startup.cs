@@ -22,9 +22,11 @@ namespace AsyncInn
         public IConfiguration Configuration { get; }
 
         // Required for dependency injection
-        public Startup(IConfiguration configuration)
+        public Startup()
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder().AddEnvironmentVariables();
+            builder.AddUserSecrets<Startup>();
+            Configuration = builder.Build();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -32,8 +34,10 @@ namespace AsyncInn
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            //this is now pointing toward the production server
             services.AddDbContext<AsyncInnDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(Configuration["ConnectionStrings:ProductionConnection"]));
+            //options.UseSqlServer(Configuration.GetConnectionString("ProductionConnection")));
 
             //
             services.AddScoped<IAmenityManager, AmenityManagementService>();

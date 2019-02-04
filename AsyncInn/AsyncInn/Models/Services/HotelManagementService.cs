@@ -26,6 +26,11 @@ namespace AsyncInn.Models.Services
         public void DeleteHotel(int id)
         {
             Hotel hotel = _context.Hotels.FirstOrDefault(hotels => hotels.ID == id);
+            IEnumerable<HotelRoom> hotelRooms = _context.HotelRooms.ToList().Where(room => room.HotelId == hotel.ID);
+            foreach(HotelRoom hotelRoom in hotelRooms)
+            {
+                _context.HotelRooms.Remove(hotelRoom);
+            }
             _context.Hotels.Remove(hotel);
             _context.SaveChanges();
         }
@@ -43,6 +48,18 @@ namespace AsyncInn.Models.Services
         public void UpdateHotel(Hotel hotel)
         {
             _context.Hotels.Update(hotel);
+            _context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Returns the number of rooms assocatied with this 
+        /// </summary>
+        /// <param name="hotel"></param>
+        /// <returns></returns>
+        public int RoomCount(Hotel hotel)
+        {
+            int roomCount = _context.HotelRooms.Where(room => room.HotelId == hotel.ID).Count();
+            return roomCount;
         }
     }
 }

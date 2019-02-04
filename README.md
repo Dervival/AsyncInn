@@ -1,7 +1,16 @@
-# Lab14, Lab15, Lab16-Intro to Entity Framework, Entity Framework and Seeding, Dependaency Injection
+# Lab14, Lab15, Lab16, and Final -Intro to Entity Framework, Entity Framework and Seeding, Dependency Injection, Testing & Deployment
 Repository for my first EF core application - a mock implementation of an asset management system for a hotel chain called "Async Inn".
 
 #### Requirements
+For the final part, the site must include:
+1. Deployment to Azure (available at https://asyncinn.azurewebsites.net/)
+1. CSS/HTML should be present on all pages of the project.
+1. Update/Edit your RoomAmentities page to not allow edits. You should only have the option to create associations, and delete associations.
+1. Modify the existing code to edit a HotelRoom - Allow a user to edit a HotelRoom combination. Remember that a Hotel cannot have more than one of the same RoomNumber. Be sure to either implement error handling or some other way to prevent the user from doing so.
+1. Add/Confirm functionality that if you “remove” a room or a hotel, all of it’s associations are also removed. If you delete a Hotel, all of the HotelRoom associations with that hotel should be removed. If you delete a Room template, all of the HotelRooms that have that room template need to be removed as well as the RoomAmenity associations
+1. Write Tests for all getter and setters as well as all CRUD operations for your services.
+1. The site should be functional, with no errors being thrown. Exceptions handled appropriately, and redirects occurring where they are needed.
+
 For part four, this site must include:
 1.Add a layout that will be inherited/utilized on all of your pages (if you haven’t already).
 1.Implement a “search box” or filter on all of your model landing pages (Hotels, Rooms, and Amenities)

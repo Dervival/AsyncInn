@@ -17,5 +17,7 @@ namespace AsyncInn.Models.Interfaces
         void UpdateConfiguration(Room room);
         //Delete a room
         void DeleteConfiguration(int id);
+        //Count number of amenities in a room
+        int AmentityCount(Room room);
     }
 }

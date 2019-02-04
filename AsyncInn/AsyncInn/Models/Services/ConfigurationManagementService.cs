@@ -45,5 +45,11 @@ namespace AsyncInn.Models.Services
         {
             _context.Rooms.Update(room);
         }
+
+        public int AmentityCount(Room room)
+        {
+            int amenityCount = _context.RoomAmenities.Where(amenity => amenity.RoomID == room.ID).Count();
+            return amenityCount;
+        }
     }
 }

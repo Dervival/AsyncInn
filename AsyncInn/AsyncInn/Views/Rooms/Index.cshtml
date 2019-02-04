@@ -45,7 +45,7 @@
             </td>
             <td>
                 @*@ViewBag.RoomCount[i]*@ @* figure out how to implement viewbag*@
-                0
+                @Html.DisplayFor(modelItem => item.AmenityCount)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

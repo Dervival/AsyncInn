@@ -26,6 +26,11 @@ namespace AsyncInn.Models.Services
         public void DeleteAmenity(int id)
         {
             Amenities amenity = _context.Amenities.FirstOrDefault(amenities => amenities.ID == id);
+            IEnumerable<RoomAmenities> amens = _context.RoomAmenities.ToList().Where(RA => RA.AmenitiesID == amenity.ID);
+            foreach (RoomAmenities roomAmenity in amens)
+            {
+                _context.RoomAmenities.Remove(roomAmenity);
+            }
             _context.Amenities.Remove(amenity);
             _context.SaveChanges();
         }

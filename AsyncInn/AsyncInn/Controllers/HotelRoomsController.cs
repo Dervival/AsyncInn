@@ -96,7 +96,7 @@ namespace AsyncInn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("HotelId,RoomNumber,RoomId,Rate,PetFriendly")] HotelRoom hotelRoom)
+        public async Task<IActionResult> Edit(int hotelId, int roomNumber, [Bind("HotelId,RoomNumber,RoomId,Rate,PetFriendly")] HotelRoom hotelRoom)
         {
             //if (id != hotelRoom.HotelId)
             //{
@@ -108,8 +108,17 @@ namespace AsyncInn.Controllers
             {
                 try
                 {
-                    _context.Update(hotelRoom);
-                    await _context.SaveChangesAsync();
+                    var existingHotelRoom = await _context.HotelRooms
+                    .Include(h => h.Hotel)
+                    .Include(h => h.Room)
+                    .FirstOrDefaultAsync(m => m.HotelId == hotelRoom.HotelId && m.RoomNumber == hotelRoom.RoomNumber);
+                    if (existingHotelRoom == null)
+                    {
+                        existingHotelRoom = await _context.HotelRooms.FindAsync(hotelId, roomNumber);
+                        _context.HotelRooms.Remove(hotelRoom);
+                        _context.Add(hotelRoom);
+                        await _context.SaveChangesAsync();
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {

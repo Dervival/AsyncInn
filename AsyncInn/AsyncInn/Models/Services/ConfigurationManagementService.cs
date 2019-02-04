@@ -27,6 +27,16 @@ namespace AsyncInn.Models.Services
         public void DeleteConfiguration(int id)
         {
             Room room = _context.Rooms.FirstOrDefault(rooms => rooms.ID == id);
+            IEnumerable<RoomAmenities> amens = _context.RoomAmenities.ToList().Where(RA => RA.RoomID == room.ID);
+            foreach (RoomAmenities roomAmenity in amens)
+            {
+                _context.RoomAmenities.Remove(roomAmenity);
+            }
+            IEnumerable<HotelRoom> hotelRooms = _context.HotelRooms.ToList().Where(r => r.RoomId == room.ID);
+            foreach (HotelRoom hotelRoom in hotelRooms)
+            {
+                _context.HotelRooms.Remove(hotelRoom);
+            }
             _context.Rooms.Remove(room);
             _context.SaveChanges();
         }

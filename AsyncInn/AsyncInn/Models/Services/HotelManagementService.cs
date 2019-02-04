@@ -26,6 +26,11 @@ namespace AsyncInn.Models.Services
         public void DeleteHotel(int id)
         {
             Hotel hotel = _context.Hotels.FirstOrDefault(hotels => hotels.ID == id);
+            IEnumerable<HotelRoom> hotelRooms = _context.HotelRooms.ToList().Where(room => room.HotelId == hotel.ID);
+            foreach(HotelRoom hotelRoom in hotelRooms)
+            {
+                _context.HotelRooms.Remove(hotelRoom);
+            }
             _context.Hotels.Remove(hotel);
             _context.SaveChanges();
         }

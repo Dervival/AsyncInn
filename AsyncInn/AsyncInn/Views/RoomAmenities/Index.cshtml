@@ -6,7 +6,7 @@
 }
 <!DOCTYPE html>
 <link href="~/StyleSheet.css" rel="stylesheet" />
-<h1>List of current c</h1>
+<h1>List of current rooms with amenities</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -34,8 +34,6 @@
                     @Html.DisplayFor(modelItem => item.Amenity.Name)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { item.RoomID, item.AmenitiesID  }) 
-                    @Html.ActionLink("Details", "Details", new { item.RoomID, item.AmenitiesID }) 
                     @Html.ActionLink("Delete", "Delete", new { item.RoomID, item.AmenitiesID })
                 </td>
             </tr>

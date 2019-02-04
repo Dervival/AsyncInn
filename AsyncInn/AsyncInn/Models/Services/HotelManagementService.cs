@@ -43,6 +43,7 @@ namespace AsyncInn.Models.Services
         public void UpdateHotel(Hotel hotel)
         {
             _context.Hotels.Update(hotel);
+            _context.SaveChanges();
         }
 
         /// <summary>

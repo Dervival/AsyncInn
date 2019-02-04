@@ -26,25 +26,25 @@ namespace AsyncInn.Controllers
             return View(await asyncInnDbContext.ToListAsync());
         }
 
-        // GET: HotelRooms/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //// GET: HotelRooms/Details/5
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var hotelRoom = await _context.HotelRooms
-                .Include(h => h.Hotel)
-                .Include(h => h.Room)
-                .FirstOrDefaultAsync(m => m.HotelId == id);
-            if (hotelRoom == null)
-            {
-                return NotFound();
-            }
+        //    var hotelRoom = await _context.HotelRooms
+        //        .Include(h => h.Hotel)
+        //        .Include(h => h.Room)
+        //        .FirstOrDefaultAsync(m => m.HotelId == id);
+        //    if (hotelRoom == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(hotelRoom);
-        }
+        //    return View(hotelRoom);
+        //}
 
         // GET: HotelRooms/Create
         public IActionResult Create()
@@ -73,17 +73,18 @@ namespace AsyncInn.Controllers
         }
 
         // GET: HotelRooms/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? hotelID, int? roomNumber)
         {
-            if (id == null)
+            if (hotelID == null || roomNumber == null)
             {
-                return NotFound();
+                throw new Exception("One of the ids was null! hotelID:" + hotelID + " roomID:" + roomNumber);
+                //return NotFound();
             }
 
-            var hotelRoom = await _context.HotelRooms.FindAsync(id);
+            var hotelRoom = await _context.HotelRooms.FindAsync(hotelID, roomNumber);
             if (hotelRoom == null)
             {
-                return NotFound();
+                throw new Exception("No hotel room found with hotelID " + hotelID + " and roomID " + roomNumber);
             }
             ViewData["HotelId"] = new SelectList(_context.Hotels, "ID", "Name", hotelRoom.HotelId);
             ViewData["RoomId"] = new SelectList(_context.Rooms, "ID", "Name", hotelRoom.RoomId);
@@ -97,10 +98,11 @@ namespace AsyncInn.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("HotelId,RoomNumber,RoomId,Rate,PetFriendly")] HotelRoom hotelRoom)
         {
-            if (id != hotelRoom.HotelId)
-            {
-                return NotFound();
-            }
+            //if (id != hotelRoom.HotelId)
+            //{
+            //    throw new Exception("id did not match hotelRoom.HotelID! id: " + id + ", hotelRoom.HotelID:" + hotelRoom.HotelId);
+            //    //return NotFound();
+            //}
 
             if (ModelState.IsValid)
             {
@@ -128,9 +130,9 @@ namespace AsyncInn.Controllers
         }
 
         // GET: HotelRooms/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? hotelID, int? roomNumber)
         {
-            if (id == null)
+            if (hotelID == null || roomNumber == null)
             {
                 return NotFound();
             }
@@ -138,7 +140,7 @@ namespace AsyncInn.Controllers
             var hotelRoom = await _context.HotelRooms
                 .Include(h => h.Hotel)
                 .Include(h => h.Room)
-                .FirstOrDefaultAsync(m => m.HotelId == id);
+                .FirstOrDefaultAsync(m => m.HotelId == hotelID && m.RoomNumber == roomNumber);
             if (hotelRoom == null)
             {
                 return NotFound();
@@ -150,9 +152,9 @@ namespace AsyncInn.Controllers
         // POST: HotelRooms/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int hotelID, int roomNumber)
         {
-            var hotelRoom = await _context.HotelRooms.FindAsync(id);
+            var hotelRoom = await _context.HotelRooms.FindAsync(hotelID, roomNumber);
             _context.HotelRooms.Remove(hotelRoom);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
